@@ -2,11 +2,8 @@ import React, { createContext, useState,useContext,useEffect } from "react";
 import axios from "axios"
 import toast from "react-hot-toast";
 const Authlogincontext = createContext(null);
-export const useAuth = ()=>{
-    return useContext(Authlogincontext)
-};
 export const AuthContextProvider = ({ children }) => {
-    const [showUserLogin,setshowUserLogin] = useState(false)
+  const [showUserLogin,setshowUserLogin] = useState(false)
     const [feedbackon,setfeedbackon] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false);
     const [userdata,setuserData] = useState()
@@ -64,3 +61,7 @@ useEffect(() => {
 };
 
 
+
+  export const useAuth = ()=>{
+      return useContext(Authlogincontext)
+  };

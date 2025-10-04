@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { User, Mail, IdCard } from 'lucide-react';
 const Feedbackcontainer = () => {
   return (
     <div className="flex flex-col items-center text-center mb-16 px-4">

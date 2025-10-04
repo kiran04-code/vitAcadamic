@@ -385,7 +385,7 @@ export const dummyLectureData = [
     units: [
       {
         unit: 'Unit 01: FUNCTIONS OF SINGLE VARIABLE ',
-        notesLink: m2unit1,
+        notesLink: m2unit2,
         subtopics: [
           {
             title: 'Single-variable functions, sequences, definitions, examples, and convergence/divergence concepts',
@@ -420,7 +420,7 @@ export const dummyLectureData = [
       },
       {
         unit: 'Unit 02: FUNCTIONS OF SEVERAL VARIABLES ',
-        notesLink: m2unit2,
+        notesLink: m2unit1,
         subtopics: [
           {
             title: 'Introduction to Multivariate functions and Partial Derivatives',

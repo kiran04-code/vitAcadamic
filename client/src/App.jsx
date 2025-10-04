@@ -15,6 +15,7 @@ import {Toaster} from "react-hot-toast"
 import Admin from './components/admin/Amin'
 import Contact from './pages/Contact'
 import Footer from './components/Footer'
+import Profile from './pages/Profile'
 function App() {
   const [light,setlight] = useState(true)
   const {showUserLogin,feedbackon} = useAuth()
@@ -31,6 +32,7 @@ function App() {
       <Route path='/pyqs/:subs' element={<PYQDashBord/>}/>
       <Route path='/:siggFeed/datafromuser' element={<SuggestionForm/>}/>
       <Route path='/Admin' element={<Admin/>}/>
+      <Route path='/profile' element={<Profile/>}/>
      
     </Routes>
     {

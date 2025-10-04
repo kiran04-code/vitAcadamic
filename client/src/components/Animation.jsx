@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-
+import { User, Mail, IdCard } from 'lucide-react';
 const Animation = () => {
   const row1Ref = useRef(null);
   const row2Ref = useRef(null);
@@ -52,7 +52,7 @@ const Animation = () => {
       `}</style>
 
       {/* First Row */}
-      <div className="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative">
+      <div className="marquee-row border-t-2 border-dashed border-[#00b395] w-full mx-auto max-w-5xl overflow-hidden relative">
         <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent"></div>
 
         <div ref={row1Ref} className="marquee-inner flex transform-gpu min-w-[200%] pt-10 pb-5">
@@ -62,7 +62,9 @@ const Animation = () => {
               className="p-4 rounded-lg mx-4 shadow hover:shadow-lg border-2 border-[#0e8168] transition-all duration-200 w-72 shrink-0 bg-white"
             >
               <div className="flex gap-2">
-                <img className="size-11 rounded-full" src={card.image} alt="User" />
+              <div className='bg-[#05caa0] justify-center flex items-center p-1 rounded-full '>
+                  <User className=' text-white'/>
+                </div>
                 <div className="flex flex-col">
                   <div className="flex items-center gap-1">
                     <p>{card.name}</p>
@@ -96,10 +98,10 @@ const Animation = () => {
       </div>
 
       {/* Second Row (Reverse) */}
-      <div className="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative">
+      <div className="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative  border-t-2 border-dashed border-[#00b395] ">
         <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent"></div>
 
-        <div ref={row2Ref} className="marquee-inner marquee-reverse flex transform-gpu min-w-[200%] pt-5 pb-10">
+        <div ref={row2Ref} className="  marquee-inner marquee-reverse flex transform-gpu min-w-[200%] pt-5 pb-10">
           {doubledCards.map((card, index) => (
             <div
               key={`row2-${index}`}
@@ -109,7 +111,9 @@ const Animation = () => {
               {/* ... */}
               {/* You can extract this into a separate Card component if needed */}
               <div className="flex gap-2">
-                <img className="size-11 rounded-full" src={card.image} alt="User" />
+                <div className='bg-[rgb(5,202,160)] justify-center flex items-center p-1 rounded-full '>
+                  <User className=' text-white'/>
+                </div>
                 <div className="flex flex-col">
                   <div className="flex items-center gap-1">
                     <p>{card.name}</p>

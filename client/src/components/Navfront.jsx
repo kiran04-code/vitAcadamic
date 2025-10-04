@@ -3,13 +3,14 @@ import { FaPhotoVideo } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
 import { FaRegNewspaper } from "react-icons/fa6";
 import { WiDayLightWind } from "react-icons/wi";
-import { NavLink } from "react-router-dom";
-import { CgProfile } from "react-icons/cg";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { User, Mail, IdCard } from 'lucide-react';
 import { useAuth } from '../context/auth';
 const Navfront = ({ setlight, light }) => {
   const [showModules, setShowModules] = useState(false); // Mobile menu toggle
   
   const [showmodule2, setshowmodule2] = useState(false)
+  const navi = useNavigate()
   const {showUserLogin,setshowUserLogin,menuOpen,setMenuOpen,userdata,logout} = useAuth()
   return (
     <div >
@@ -72,9 +73,13 @@ const Navfront = ({ setlight, light }) => {
             
             <li className="md:hidden mt-3">
             {
-              userdata ? <div><a className="bg-[#33A491] hover:bg-[#31524c] text-white text-sm font-semibold px-4 py-2 rounded-md transition" href="#" onClick={()=>{logout(),setMenuOpen(false)}} >
+              userdata ? <div className='flex flex-col gap-5'><Link className="bg-[#33A491] hover:bg-[#31524c] text-white text-sm font-semibold px-4 py-2 rounded-md transition" to="#" onClick={()=>{logout(),setMenuOpen(false)}} >
                 Logout
-            </a></div>:<div>
+            </Link>
+            <Link className="bg-[#33A491] hover:bg-[#31524c] text-white text-sm font-semibold px-4 py-2 rounded-md transition" to="/profile"  >
+                Profile
+            </Link>
+            </div>:<div>
               <a href="#" className="bg-[#33A491] hover:bg-[#559288] text-white text-sm font-semibold block text-center px-4 py-2 rounded-md transition mt-2 " onClick={()=>setshowUserLogin(true)} >
                 Login for Free Study material
               </a></div>
@@ -86,9 +91,13 @@ const Navfront = ({ setlight, light }) => {
           <div className="hidden md:flex items-center space-x-6">
     
             {
-              userdata ? <div><a className="bg-[#33A491] hover:bg-[#31524c] text-white text-sm font-semibold px-4 py-2 rounded-md transition" href="#" onClick={()=>{logout(),setMenuOpen(false)}}  >
+              userdata ? <div className='flex justify-center items-center gap-5'><a className="bg-[#33A491] hover:bg-[#31524c] text-white text-sm font-semibold px-4 py-2 rounded-md transition" href="#" onClick={()=>{logout(),setMenuOpen(false)}}  >
                 Logout
-            </a></div> :<div><a className="bg-[#33A491] hover:bg-[#31524c] text-white text-sm font-semibold px-4 py-2 rounded-md transition" href="#" onClick={()=>setshowUserLogin(true)}>
+            </a>
+             <div className='bg-[#33A491] p-1.5 rounded-4xl justify-center items-center flex ' onClick={()=>navi("/profile")}>
+              <User className='text-3xl   text-[#ffffff]'/>
+              </div>
+            </div> :<div className=''><a className="bg-[#33A491] hover:bg-[#31524c] text-white text-sm font-semibold px-4 py-2 rounded-md transition" href="#" onClick={()=>setshowUserLogin(true)}>
                 Login for Free Study material
             </a></div>
             }
