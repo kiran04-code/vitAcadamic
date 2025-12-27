@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { IoClose } from 'react-icons/io5';
+import { X, ExternalLink, PlayCircle, Youtube, Loader2 } from 'lucide-react';
 
 const VideoModal = ({ isOpen, onClose, videoUrl, title }) => {
   const [isLoading, setIsLoading] = useState(true);
-  // Extract YouTube video ID or playlist ID from URL
+
   const getYouTubeVideoId = (url) => {
     if (!url) return null;
-    
-    // Handle YouTube playlist URLs
     const playlistMatch = url.match(/[?&]list=([a-zA-Z0-9_-]+)/);
-    if (playlistMatch) {
-      return { type: 'playlist', id: playlistMatch[1] };
-    }
+    if (playlistMatch) return { type: 'playlist', id: playlistMatch[1] };
     
-    // Handle different YouTube video URL formats
     const patterns = [
       /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^#&?]*)/,
-      /youtube\.com\/v\/([^#&?]*)/,
+      /youtu\.be\/|youtube\.com\/v\/([^#&?]*)/,
       /youtube\.com\/watch\?.*v=([^#&?]*)/
     ];
     
@@ -26,26 +21,16 @@ const VideoModal = ({ isOpen, onClose, videoUrl, title }) => {
         return { type: 'video', id: match[1] };
       }
     }
-    
     return null;
   };
 
-  // Close modal on Escape key press
   useEffect(() => {
-    const handleEscape = (event) => {
-      if (event.keyCode === 27) {
-        onClose();
-      }
-    };
-
+    const handleEscape = (e) => { if (e.key === 'Escape') onClose(); };
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
-      setIsLoading(true);
-    } else {
-      setIsLoading(true);
+      setIsLoading(true); // Reset loading state when opening
     }
-
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
@@ -59,69 +44,79 @@ const VideoModal = ({ isOpen, onClose, videoUrl, title }) => {
   const videoId = videoData?.id;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-2 sm:p-4">
-      <div className="bg-white rounded-lg shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-hidden">
-        {/* Modal Header */}
-        <div className="flex justify-between items-center p-3 sm:p-4 border-b border-gray-200">
-          <h2 className="text-sm sm:text-lg font-semibold text-gray-800 truncate pr-4">
-            {title || (isPlaylist ? 'Video Playlist' : 'Video Lecture')}
-          </h2>
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-2 sm:p-4 md:p-8">
+      {/* Overlay - Increased Opacity for focus */}
+      <div 
+        className="absolute inset-0 bg-slate-900/90 backdrop-blur-md transition-opacity duration-300" 
+        onClick={onClose} 
+      />
+      
+      {/* Modal Container */}
+      <div className="relative bg-white w-full max-w-5xl rounded-2xl md:rounded-[2rem] shadow-2xl overflow-hidden flex flex-col max-h-[95vh] z-10 transition-all transform duration-300 scale-100">
+        
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 md:p-6 border-b border-slate-100 bg-white">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="hidden xs:flex w-10 h-10 bg-[#33A491]/10 rounded-xl items-center justify-center text-[#33A491] shrink-0">
+              <PlayCircle size={24} />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] font-black uppercase tracking-widest text-[#33A491]">Now Viewing</p>
+              <h2 className="text-sm md:text-base font-bold text-slate-900 truncate">
+                {title || (isPlaylist ? 'Video Playlist' : 'Lecture Video')}
+              </h2>
+            </div>
+          </div>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 transition-colors p-1 flex-shrink-0"
-            aria-label="Close modal"
+            className="p-2 hover:bg-slate-100 text-slate-400 hover:text-red-500 rounded-xl transition-all"
           >
-            <IoClose size={24} />
+            <X size={24} />
           </button>
         </div>
 
-        {/* Video Container */}
-        <div className="relative w-full bg-black" style={{ paddingBottom: '56.25%' /* 16:9 aspect ratio */ }}>
+        {/* Video Body - Forces 16:9 while allowing container to shrink */}
+        <div className="relative w-full bg-black flex-shrink-0 aspect-video">
           {isLoading && videoId && (
-            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900">
-              <div className="text-center text-white">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-                <p>Loading video...</p>
-              </div>
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 bg-slate-900">
+              <Loader2 className="w-10 h-10 text-[#33A491] animate-spin" />
+              <p className="text-white/50 text-[10px] font-bold uppercase tracking-widest">Loading Media...</p>
             </div>
           )}
+
           {videoId ? (
             <iframe
               className="absolute top-0 left-0 w-full h-full"
               src={isPlaylist 
-                ? `https://www.youtube.com/embed/videoseries?list=${videoId}&autoplay=1&rel=0&modestbranding=1`
-                : `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&fs=1&cc_load_policy=1&iv_load_policy=3`
+                ? `https://www.youtube.com/embed/videoseries?list=${videoId}&autoplay=1&rel=0`
+                : `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`
               }
-              title={title || (isPlaylist ? 'Video Playlist' : 'Video Lecture')}
+              title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              loading="lazy"
               onLoad={() => setIsLoading(false)}
             />
           ) : (
-            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100">
-              <div className="text-center text-gray-500">
-                <div className="mb-4">
-                  <svg className="mx-auto h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <p className="text-lg font-medium">Invalid Video URL</p>
-                <p className="text-sm">Please check the video link</p>
-                {videoUrl && (
-                  <p className="text-xs mt-2 text-gray-400 break-all">{videoUrl}</p>
-                )}
-              </div>
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-100 p-6 text-center">
+              <Youtube size={48} className="text-slate-300 mb-2" />
+              <p className="text-sm font-bold text-slate-500 uppercase">Unable to load video</p>
+              <p className="text-xs text-slate-400 mt-1">Please verify the URL: {videoUrl}</p>
             </div>
           )}
         </div>
-        {/* Modal Footer */}
-        <div className="p-3 sm:p-4 border-t border-gray-200 bg-gray-50">
-          <div className="flex flex-col sm:flex-row justify-end gap-3">
+
+        {/* Footer - Scrollable on mobile if height is tight */}
+        <div className="p-4 md:p-6 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+             <div className="w-2 h-2 rounded-full bg-[#33A491] animate-pulse" />
+             <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Secure Stream</span>
+          </div>
+          
+          <div className="flex items-center gap-3 w-full sm:w-auto">
             <button
               onClick={onClose}
-              className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors border border-gray-300 rounded hover:bg-gray-100"
+              className="flex-1 sm:flex-none px-6 py-2.5 text-slate-500 font-bold text-xs uppercase hover:text-slate-900 transition-colors"
             >
               Close
             </button>
@@ -130,9 +125,9 @@ const VideoModal = ({ isOpen, onClose, videoUrl, title }) => {
                 href={videoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-[#136457] text-white rounded hover:bg-[#0e4a3f] transition-colors text-center"
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#33A491] text-white px-6 py-2.5 rounded-xl font-bold text-xs uppercase hover:bg-[#2a8a7a] transition shadow-lg shadow-[#33a49133]"
               >
-                Open in YouTube
+                <ExternalLink size={14} /> View on YouTube
               </a>
             )}
           </div>
@@ -142,4 +137,4 @@ const VideoModal = ({ isOpen, onClose, videoUrl, title }) => {
   );
 };
 
-export default VideoModal;
+export default VideoModal;  

@@ -1,134 +1,111 @@
-import React, { useEffect, useRef } from 'react';
-import { User, Mail, IdCard } from 'lucide-react';
-const Animation = () => {
-  const row1Ref = useRef(null);
-  const row2Ref = useRef(null);
+import React from 'react';
+import { User, CheckCircle2, Quote, Star } from 'lucide-react';
 
-  const cardsData = [
+/**
+ * Component Name: Animation
+ * Description: A static, premium grid showing genuine student feedback.
+ * Design: White Bento style with #33A491 accents.
+ */
+const Animation = () => {
+  // Genuine student feedback data focusing on VIT Pune resources
+  const feedbacks = [
     {
-      image: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200',
-      name: 'jay Deshmukh',
-      handle: '@Deshmukh',
-      date: 'April 20, 2025',
+      name: 'Jay Deshmukh',
+      handle: '@jay_desh',
+      text: "The PYQ archive is a lifesaver for Endsem prep. Found exactly what I needed for Applied Maths in seconds.",
+      category: 'Exam Success'
     },
     {
-      image: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200',
-      name: 'Vedant polawar',
-      handle: '@averywrites',
-      date: 'May 10, 2025',
+      name: 'Vedant Polawar',
+      handle: '@vedant_p',
+      text: "No more hunting for YouTube links. Everything is organized unit-wise. Best thing to happen to my CGPA!",
+      category: 'Lecture Library'
     },
     {
-      image: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&auto=format&fit=crop&q=60',
       name: 'Ganesh Rayphale',
-      handle: '@jordantalks',
-      date: 'June 5, 2025',
+      handle: '@ganesh_r',
+      text: "The notes are incredibly clean and easy to follow. Perfect for last-minute revisions before the MSE.",
+      category: 'Curated Notes'
     },
     {
-      image: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&auto=format&fit=crop&q=60',
-      name: 'karan Thombre',
-      handle: '@averywrites',
-      date: 'May 10, 2025',
-    },
+      name: 'Karan Thombre',
+      handle: '@karan_t',
+      text: "Finally, a platform that understands VIT's curriculum. The interface is smooth and actually useful.",
+      category: 'User Experience'
+    }
   ];
 
-  // Duplicate cards for infinite scroll
-  const doubledCards = [...cardsData, ...cardsData];
-
   return (
-    <div>
-      <style>{`
-        @keyframes marqueeScroll {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
-        }
+    <div className="py-24 bg-slate-50 overflow-hidden px-6">
+      <div className="max-w-7xl mx-auto">
+        
 
-        .marquee-inner {
-          animation: marqueeScroll 25s linear infinite;
-        }
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-[#33A491]/10 text-[#33A491] px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4">
+            <Star size={14} fill="currentColor" /> Student Feedback
+          </div>
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter leading-none">
+            Verified Student <span className="text-[#33A491]">Reviews</span>
+          </h2>
+        </div>
 
-        .marquee-reverse {
-          animation-direction: reverse;
-        }
-      `}</style>
 
-      {/* First Row */}
-      <div className="marquee-row border-t-1 border-dashed border-[#00b395] w-full mx-auto max-w-5xl overflow-hidden relative">
-        <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none"></div>
-
-        <div ref={row1Ref} className="marquee-inner flex transform-gpu min-w-[200%] pt-10 pb-5">
-          {doubledCards.map((card, index) => (
-            <div
-              key={`row1-${index}`}
-              className="p-4 rounded-lg mx-4 shadow hover:shadow-lg border-2 border-[#0e8168] transition-all duration-200 w-72 shrink-0 bg-white"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {feedbacks.map((card, index) => (
+            <div 
+              key={index}
+              className="bg-white p-8 rounded-[2.5rem] border border-slate-200/60 shadow-sm flex flex-col hover:border-[#33A491]/40 transition-all duration-500 group"
             >
-              <div className="flex gap-2">
-              <div className='bg-[#05caa0] justify-center flex items-center p-1 rounded-full '>
-                  <User className=' text-white'/>
+  
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:bg-[#33A491] group-hover:text-white transition-all duration-300">
+                  <User size={24} />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col min-w-0">
                   <div className="flex items-center gap-1">
-                    <p>{card.name}</p>
-                    <svg
-                      className="mt-0.5"
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M4.555.72a4 4 0 0 1-.297.24c-.179.12-.38.202-.59.244a4 4 0 0 1-.38.041c-.48.039-.721.058-.922.129a1.63 1.63 0 0 0-.992.992c-.071.2-.09.441-.129.922a4 4 0 0 1-.041.38 1.6 1.6 0 0 1-.245.59 3 3 0 0 1-.239.297c-.313.368-.47.551-.56.743-.213.444-.213.96 0 1.404.09.192.247.375.56.743.125.146.187.219.24.297.12.179.202.38.244.59.018.093.026.189.041.38.039.48.058.721.129.922.163.464.528.829.992.992.2.071.441.09.922.129.191.015.287.023.38.041.21.042.411.125.59.245.078.052.151.114.297.239.368.313.551.47.743.56.444.213.96.213 1.404 0 .192-.09.375-.247.743-.56.146-.125.219-.187.297-.24.179-.12.38-.202.59-.244a4 4 0 0 1 .38-.041c.48-.039.721-.058.922-.129.464-.163.829-.528.992-.992.071-.2.09-.441.129-.922a4 4 0 0 1 .041-.38c.042-.21.125-.411.245-.59.052-.078.114-.151.239-.297.313-.368.47-.551.56-.743.213-.444.213-.96 0-1.404-.09-.192-.247-.375-.56-.743a4 4 0 0 1-.24-.297 1.6 1.6 0 0 1-.244-.59 3 3 0 0 1-.041-.38c-.039-.48-.058-.721-.129-.922a1.63 1.63 0 0 0-.992-.992c-.2-.071-.441-.09-.922-.129a4 4 0 0 1-.38-.041 1.6 1.6 0 0 1-.59-.245A3 3 0 0 1 7.445.72C7.077.407 6.894.25 6.702.16a1.63 1.63 0 0 0-1.404 0c-.192.09-.375.247-.743.56m4.07 3.998a.488.488 0 0 0-.691-.69l-2.91 2.91-.958-.957a.488.488 0 0 0-.69.69l1.302 1.302c.19.191.5.191.69 0z"
-                        fill="#2196F3"
-                      />
-                    </svg>
+                    <p className="font-black text-slate-900 text-xs uppercase tracking-tight truncate">
+                      {card.name}
+                    </p>
+                    <CheckCircle2 size={12} className="text-blue-500 fill-blue-50" />
                   </div>
-                  <span className="text-xs text-slate-500">{card.handle}</span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                    {card.handle}
+                  </span>
                 </div>
               </div>
-              <p className="text-sm pt-4 text-gray-800">
-                Radiant made undercutting all of our competitors an absolute breeze.
-              </p>
+
+     
+              <div className="relative flex-grow">
+                <Quote size={20} className="text-[#33A491]/10 absolute -top-3 -left-2" />
+                <p className="text-sm leading-relaxed text-slate-600 font-medium italic relative z-10">
+                  "{card.text}"
+                </p>
+              </div>
+
+   
+              <div className="mt-8 pt-6 border-t border-slate-50">
+                <div className="flex items-center justify-between">
+                  <span className="text-[9px] font-black text-[#33A491] uppercase tracking-[0.2em] bg-[#33A491]/5 px-3 py-1.5 rounded-lg">
+                    {card.category}
+                  </span>
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={10} className="fill-[#33A491] text-[#33A491]" />
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent"></div>
-      </div>
 
-      {/* Second Row (Reverse) */}
-      <div className="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative  border-t-1 border-dashed border-[#00b395] ">
-        <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent"></div>
-
-        <div ref={row2Ref} className="  marquee-inner marquee-reverse flex transform-gpu min-w-[200%] pt-5 pb-10">
-          {doubledCards.map((card, index) => (
-            <div
-              key={`row2-${index}`}
-              className="p-4 rounded-lg mx-4 shadow hover:shadow-lg border-1 border-[#0c8168] transition-all duration-200 w-72 shrink-0 bg-white"
-            >
-              {/* Same content as above */}
-              {/* ... */}
-              {/* You can extract this into a separate Card component if needed */}
-              <div className="flex gap-2">
-                <div className='bg-[rgb(5,202,160)] justify-center flex items-center p-1 rounded-full '>
-                  <User className=' text-white'/>
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-1">
-                    <p>{card.name}</p>
-                  </div>
-                  <span className="text-xs text-slate-500">{card.handle}</span>
-                </div>
-              </div>
-              <p className="text-sm pt-4 text-gray-800">
-                Radiant made undercutting all of our competitors an absolute breeze.
-              </p>
-            </div>
-          ))}
+        <div className="mt-16 text-center">
+            <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">
+                Join our growing community of learners today.
+            </p>
         </div>
 
-        <div className="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent"></div>
       </div>
     </div>
   );

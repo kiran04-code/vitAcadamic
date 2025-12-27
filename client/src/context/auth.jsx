@@ -7,6 +7,7 @@ export const AuthContextProvider = ({ children }) => {
     const [feedbackon,setfeedbackon] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false);
     const [userdata,setuserData] = useState()
+    console.log(userdata)
     const baseUrl = import.meta.env.VITE_SERVER_URL
     axios.defaults.baseURL = baseUrl
     axios.defaults.withCredentials = true

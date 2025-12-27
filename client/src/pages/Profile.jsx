@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Profile() {
   const { userdata, logout } = useAuth();
+  console.log(userdata)
   const navi = useNavigate();
 
   return (
