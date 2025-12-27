@@ -1,87 +1,74 @@
 import React from 'react';
 import { useAuth } from '../context/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { Github, Twitter, Linkedin, ArrowRight } from 'lucide-react';
 
 const Footer = () => {
   const { setfeedbackon } = useAuth();
   const navigate = useNavigate();
 
   return (
-    <footer className="w-full bg-[#cfeee9] text-gray-700">
-      <div className="px-6 md:px-16 lg:px-24 xl:px-32 py-12 border-b border-gray-300/40">
-        <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-20">
-
-          {/* Left Section */}
-          <div className="max-w-md">
-            <img src="/VIT2.png" alt="Edunation Logo" className="h-14 mb-4" />
-            <p className="text-sm text-gray-600 leading-relaxed">
-              Edunation is your digital learning space connecting students, teachers, 
-              and innovators. Empower your education with knowledge and technology.
+    <footer className="w-full bg-white border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+          
+          <div className="md:col-span-5">
+            <img src="/VIT2.png" alt="Logo" className="h-10 mb-6" />
+            <p className="text-slate-500 text-sm leading-relaxed max-w-sm">
+              The premium digital ecosystem for VIT Pune students. 
+              Bridging the gap between resources and results through 
+              curated technology and community-driven content.
             </p>
-
-            {/* Social Media */}
-            <div className="flex items-center gap-4 mt-5">
-              <a href="#" className="hover:scale-110 transition-transform duration-200">
-                <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
-                  <path d="M19.167 2.5a9.1 9.1 0 0 1-2.617 1.275 3.733 3.733 0 0 0-6.55 2.5v.833a8.88 8.88 0 0 1-7.5-3.775s-3.333 7.5 4.167 10.833a9.7 9.7 0 0 1-5.834 1.667C8.333 20 17.5 15.833 17.5 6.25q0-.35-.067-.692A6.43 6.43 0 0 0 19.167 2.5"
-                    stroke="#33A491" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-              <a href="#" className="hover:scale-110 transition-transform duration-200">
-                <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
-                  <path d="M7.5 15.833c-4.167 1.25-4.167-2.084-5.833-2.5m11.666 5v-3.225a2.8 2.8 0 0 0-.783-2.175c2.616-.292 5.366-1.283 5.366-5.833a4.53 4.53 0 0 0-1.25-3.125 4.22 4.22 0 0 0-.075-3.142s-.983-.292-3.258 1.233a11.15 11.15 0 0 0-5.833 0C5.225.541 4.242.833 4.242.833a4.22 4.22 0 0 0-.075 3.142 4.53 4.53 0 0 0-1.25 3.15c0 4.516 2.75 5.508 5.366 5.833a2.8 2.8 0 0 0-.783 2.15v3.225"
-                    stroke="#33A491" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-              <a href="#" className="hover:scale-110 transition-transform duration-200">
-                <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
-                  <path d="M13.333 6.667a5 5 0 0 1 5 5V17.5H15v-5.833a1.667 1.667 0 0 0-3.334 0V17.5H8.333v-5.833a5 5 0 0 1 5-5M5 7.5H1.667v10H5zM3.333 5a1.667 1.667 0 1 0 0-3.333 1.667 1.667 0 0 0 0 3.333"
-                    stroke="#33A491" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
+            <div className="flex gap-5 mt-8">
+              <a href="#" className="p-2 rounded-full bg-slate-50 text-slate-400 hover:text-[#33A491] transition-colors"><Twitter size={18} /></a>
+              <a href="#" className="p-2 rounded-full bg-slate-50 text-slate-400 hover:text-[#33A491] transition-colors"><Github size={18} /></a>
+              <a href="#" className="p-2 rounded-full bg-slate-50 text-slate-400 hover:text-[#33A491] transition-colors"><Linkedin size={18} /></a>
             </div>
           </div>
 
-          {/* Right Section */}
-          <div className="grid grid-cols-2 gap-10 md:gap-16">
+          <div className="md:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-8">
             <div>
-              <h2 className="font-semibold text-gray-900 mb-4 text-lg">RESOURCES</h2>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li><a href="#" className="hover:text-[#33A491] transition">Documentation</a></li>
-                <li><a href="#" className="hover:text-[#33A491] transition">Tutorials</a></li>
-                <li><a href="#" className="hover:text-[#33A491] transition">Blog</a></li>
-                <li><a href="#" className="hover:text-[#33A491] transition">Community</a></li>
+              <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-900 mb-6">Resources</h4>
+              <ul className="space-y-4 text-sm font-medium text-slate-500">
+                <li><Link to="/module1" className="hover:text-[#33A491] transition">Lectures</Link></li>
+                <li><Link to="/pyq/module1" className="hover:text-[#33A491] transition">Archives</Link></li>
+                <li><a href="#" className="hover:text-[#33A491] transition">Cheat Sheets</a></li>
               </ul>
-              <button
-                onClick={() => navigate("/contact")}
-                className="mt-5 bg-[#33A491] hover:bg-[#2a8a79] text-white px-4 py-2 rounded-md text-sm transition"
-              >
-                Contact Us
-              </button>
             </div>
 
             <div>
-              <h2 className="font-semibold text-gray-900 mb-4 text-lg">COMPANY</h2>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li><a href="#" className="hover:text-[#33A491] transition">About</a></li>
-                <li><a href="#" className="hover:text-[#33A491] transition">Careers</a></li>
-                <li><a href="#" className="hover:text-[#33A491] transition">Privacy</a></li>
-                <li><a href="#" className="hover:text-[#33A491] transition">Terms</a></li>
+              <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-900 mb-6">Community</h4>
+              <ul className="space-y-4 text-sm font-medium text-slate-500">
+                <li><button onClick={() => setfeedbackon(true)} className="hover:text-[#33A491] transition">Feedback</button></li>
+                <li><button onClick={() => navigate("/contact")} className="hover:text-[#33A491] transition">Support</button></li>
+                <li><a href="#" className="hover:text-[#33A491] transition">Developers</a></li>
               </ul>
-              <button
+            </div>
+
+            <div className="col-span-2 md:col-span-1">
+              <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-900 mb-6">Actions</h4>
+              <button 
                 onClick={() => setfeedbackon(true)}
-                className="mt-5 bg-[#33A491] hover:bg-[#2a8a79] text-white px-4 py-2 rounded-md text-sm transition"
+                className="w-full flex items-center justify-between bg-slate-50 hover:bg-[#33A491]/10 border border-slate-200 p-4 rounded-2xl group transition-all"
               >
-                Send Feedback
+                <span className="text-xs font-bold text-slate-900">Send Feedback</span>
+                <ArrowRight size={14} className="text-[#33A491] group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="py-4 bg-[#33A491] text-white text-center text-xs md:text-sm">
-        © 2025 <span className="font-semibold">Kiran.dev & Team</span> | All Rights Reserved.
+      <div className="border-t border-slate-50 py-8 bg-slate-50/50">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+            © 2025 Edunation • Built by <span className="text-slate-900">Kiran.dev & Team</span>
+          </p>
+          <div className="flex gap-6 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+            <a href="#" className="hover:text-slate-900">Privacy</a>
+            <a href="#" className="hover:text-slate-900">Terms</a>
+          </div>
+        </div>
       </div>
     </footer>
   );

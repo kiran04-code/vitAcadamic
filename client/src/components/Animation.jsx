@@ -52,8 +52,8 @@ const Animation = () => {
       `}</style>
 
       {/* First Row */}
-      <div className="marquee-row border-t-2 border-dashed border-[#00b395] w-full mx-auto max-w-5xl overflow-hidden relative">
-        <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent"></div>
+      <div className="marquee-row border-t-1 border-dashed border-[#00b395] w-full mx-auto max-w-5xl overflow-hidden relative">
+        <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none"></div>
 
         <div ref={row1Ref} className="marquee-inner flex transform-gpu min-w-[200%] pt-10 pb-5">
           {doubledCards.map((card, index) => (
@@ -98,7 +98,7 @@ const Animation = () => {
       </div>
 
       {/* Second Row (Reverse) */}
-      <div className="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative  border-t-2 border-dashed border-[#00b395] ">
+      <div className="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative  border-t-1 border-dashed border-[#00b395] ">
         <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent"></div>
 
         <div ref={row2Ref} className="  marquee-inner marquee-reverse flex transform-gpu min-w-[200%] pt-5 pb-10">
